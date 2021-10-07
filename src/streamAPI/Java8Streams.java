@@ -41,7 +41,16 @@ public class Java8Streams {
         .map(e -> e.toLowerCase(Locale.ROOT)) // lista original nao é modificada
         .forEach(e -> System.out.prinln(e))
     )
-    
-    }
-
+        
+     // -----------------------
+        Path dictionary = Paths.get(args[0]); 
+        int minGroupSize = Integer.parseInt(arg[1]); 
+        try(Stream<String> words = Files.lines(dictionary)){
+            words.collect(groupingBy(word -> alphabetize(word)) 
+                          .values().stream()
+                          .filter(group -> group.size() >= minGroupSize) 
+                          .forEach(g -> System.out.println(g.size() + ":" + g)); 
+        }     
+     }
+   }                      
 }
